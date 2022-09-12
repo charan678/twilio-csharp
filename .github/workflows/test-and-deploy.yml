@@ -30,7 +30,13 @@ jobs:
         run: make test
 
       - name: Install SonarCloud scanner and run analysis
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: highbyte/sonarscan-dotnet@v2.1.3
+        with:
+          sonarProjectKey: charan678-sonar-test
+          sonarProjectName: charan678-sonar-test
+          sonarOrganization: charan678-sonar-test
+          sonarBeginArguments: /k:"twilio_twilio-csharp" /o:"twilio" /d:sonar.host.url=https://sonarcloud.io /d:sonar.login="${SONAR_TOKEN}"  /d:sonar.language="cs" /d:sonar.exclusions="test/Twilio.Test/**/*.*" /d:sonar.cs.opencover.reportsPaths="test/lcov.net451.opencover.xml"
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
